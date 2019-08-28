@@ -3,10 +3,10 @@ title: \vspace{3.5in} "Putting the R in ScHARR"
 author: "Robert Smith"
 date: "`r format(Sys.time(), '%d. %B %Y')`"
 output:
+  
   pdf_document: default
   word_document: default
   html_document: default
-  
 editor_options: 
   chunk_output_type: console
 ---
