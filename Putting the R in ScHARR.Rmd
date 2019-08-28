@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \tableofcontents
 
 \newpage 
-want to see if this is changing.
+final check
 ## Introduction to R
 This series of short courses are designed to equip the participant with a basic set of tools to undertake research using R. The aim is to create a strong foundation on which participants can build skills and knowledge specific to their research and consultancy objectives. The course makes use of the authors' experiences (many of which were frustrating) of working with R for data-science and statistical analysis. However there are many other resources available, and we would particularly recommend the freely available content at *[R for Data Science](https://r4ds.had.co.nz/)* as a good place to recap the materials taught in this course. The hard copy of Hadley Wickham and Garrett Grolemund's book of the same name (and content) is available at *[Amazon.com](https://r4ds.had.co.nz/)*. Alternatively, a user guide is available on the CRAN R-Project website [here](https://cran.r-project.org/doc/manuals/r-release/R-intro.html), although the author finds this less easy to follow than Hadley Wickham's book described above. Further details of where to go to answer more specific questions are provided throughout the course.
 
