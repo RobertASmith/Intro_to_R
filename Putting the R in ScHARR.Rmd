@@ -323,9 +323,13 @@ Example 3 runs a simple simulation testing the claims by the FIRE movement, Fina
 
 library("imager")
 library(ggplot2)
+library(magick)
 
-image <- load.image(file = "Images/FIRE.jpg")
-plot(image, axes = F)
+firepic <- image_read(path = "https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Images/Firepic.JPG")
+
+print(firepic)
+# alternatively could plot it like a graph - plot(firepic)
+
 ```
 
 We start by clearing the work environment and loading pre-downloaded packages and the required data.
@@ -345,7 +349,7 @@ library(fitdistrplus)
 
 # Read in data from source, an excel file using data from https://www.macrotrends.net/2526/sp-500-historical-annual-returns
 
-sp500 <- as.data.frame(read_excel("Data/snp.xlsx", sheet = "Sheet1"))
+#sp500 <- as.data.frame(read_excel("Data/snp.xlsx", sheet = "Sheet1"))
 
 sp500 <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/snp.csv")
 
