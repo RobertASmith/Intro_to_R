@@ -201,12 +201,12 @@ setwd(filename)
 
 Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,echo=TRUE}
 # load the readr package, if this is not installed then install it.
 library(readr)
 
 #use the function read_csv
-data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/who_complete.csv")
+data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
 ```
 
 Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available. 
@@ -346,6 +346,9 @@ library(fitdistrplus)
 # Read in data from source, an excel file using data from https://www.macrotrends.net/2526/sp-500-historical-annual-returns
 
 sp500 <- as.data.frame(read_excel("Data/snp.xlsx", sheet = "Sheet1"))
+
+sp500 <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/snp.csv")
+
 ```
 
 Then we can look at real returns of the S&P500 index since 1928.
