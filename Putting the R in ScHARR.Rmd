@@ -521,6 +521,11 @@ knitr::include_url(url = "https://www.youtube.com/watch?v=KznAcOK7cTQ")
 <iframe src="https://www.youtube.com/watch?v=KznAcOK7cTQ" style="border: none; width: 900px; height: 500px"></iframe>
 
 # Creating an animation
+
+It is possible to create animations in R. For public health this may be best when trying to show how a relationship between two variables changes over time, allowing a x and y axis to be displayed for each time period and moving through time periods allowing the viewer to 'see' the relationship changing.
+
+This example allows the user to see how life expectancy and GDP per capita change over time in these countries. Using GGPlot it is also possible to see how the size of the countries change over time by changing the size of the points.
+
 ```{r,echo=TRUE,eval=FALSE}
 #  install.packages("magick")
 
@@ -554,3 +559,8 @@ animation <- image_animate(image = img, loop = 2,fps = 2)
 image_write(image = animation, path = "C:/Users/Robert/Desktop/Rcourse/Intro_to_R/Images/gapminder.gif")
 
 ```
+
+In my own research I have use this to show how the distribution of physical activity changes as a cohort ages from 16 to 80 years of age...
+
+
+
