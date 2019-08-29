@@ -520,3 +520,37 @@ knitr::include_url(url = "https://www.youtube.com/watch?v=KznAcOK7cTQ")
 ```
 <iframe src="https://www.youtube.com/watch?v=KznAcOK7cTQ" style="border: none; width: 900px; height: 500px"></iframe>
 
+# Creating an animation
+```{r,echo=TRUE,eval=FALSE}
+#  install.packages("magick")
+
+library(gapminder)
+library(ggplot2)
+
+img <- image_graph(width = 600,height = 400,res = 100)
+
+datalist <- split(gapminder,gapminder$year)
+
+out <- lapply(X = datalist,FUN = function(data){
+          p <- ggplot(data, aes(gdpPercap, 
+                                lifeExp, 
+                                size = pop, 
+                                color = continent)) +
+                scale_size(name = "population", 
+                           limits = range(gapminder$pop)) + 
+                geom_point() + 
+                ylim(20, 90) + 
+                scale_x_log10(limits = range(gapminder$gdpPercap)) + 
+                ggtitle(data$year) + 
+                theme_classic()
+          print(p)
+          })
+
+dev.off()
+
+animation <- image_animate(image = img, loop = 2,fps = 2)
+
+
+image_write(image = animation, path = "C:/Users/Robert/Desktop/Rcourse/Intro_to_R/Images/gapminder.gif")
+
+```
