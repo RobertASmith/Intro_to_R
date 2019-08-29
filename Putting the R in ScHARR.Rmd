@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \tableofcontents
 
 \newpage 
-final check
+
 ## Introduction to R
 This series of short courses are designed to equip the participant with a basic set of tools to undertake research using R. The aim is to create a strong foundation on which participants can build skills and knowledge specific to their research and consultancy objectives. The course makes use of the authors' experiences (many of which were frustrating) of working with R for data-science and statistical analysis. However there are many other resources available, and we would particularly recommend the freely available content at *[R for Data Science](https://r4ds.had.co.nz/)* as a good place to recap the materials taught in this course. The hard copy of Hadley Wickham and Garrett Grolemund's book of the same name (and content) is available at *[Amazon.com](https://r4ds.had.co.nz/)*. Alternatively, a user guide is available on the CRAN R-Project website [here](https://cran.r-project.org/doc/manuals/r-release/R-intro.html), although the author finds this less easy to follow than Hadley Wickham's book described above. Further details of where to go to answer more specific questions are provided throughout the course.
 
@@ -84,7 +84,10 @@ By the end of the 1 day short course, the attendee should be able to:
 * Change replicate analysis for new or updated datasets, or create templates for routine data.
 * Create markdown presentations.
 
-## Day One
+\newpage
+
+\vspace{3.5in} 
+# Course 1
 
 ### Install and navigate R Studio.
 
@@ -137,7 +140,7 @@ ${12\times(a+b)}\over {x}$
 
 Functions can be applied to make data manipulation easier. Many functions are included in baseR. For example the 'log' function takes the log of a number. We can start by looking up the help file and see that the default for base for log is exp(1).
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
 help(log)
 
 # base exp(1) is the default
@@ -198,7 +201,7 @@ setwd(filename)
 
 Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
 
-```{r,echo=TRUE}
+```{r,echo=TRUE,eval=FALSE}
 # load the readr package, if this is not installed then install it.
 library(readr)
 
@@ -321,7 +324,7 @@ Example 3 runs a simple simulation testing the claims by the FIRE movement, Fina
 library("imager")
 library(ggplot2)
 
-image <- load.image(file = "images/FIRE.jpg")
+image <- load.image(file = "Images/FIRE.jpg")
 plot(image, axes = F)
 ```
 
@@ -341,7 +344,8 @@ library(readxl)
 library(fitdistrplus)
 
 # Read in data from source, an excel file using data from https://www.macrotrends.net/2526/sp-500-historical-annual-returns
-sp500 <- as.data.frame(read_excel("C:/Users/Robert/Google Drive/R_tutorials/snp.xlsx", sheet = "Sheet1"))
+
+sp500 <- as.data.frame(read_excel("Data/snp.xlsx", sheet = "Sheet1"))
 ```
 
 Then we can look at real returns of the S&P500 index since 1928.
@@ -411,7 +415,7 @@ legend('topleft',
 
 ```
 
-Then we can run a simulation to see what would happen to a £1million pound portfolio invested solely in the S&P500. We want to see what happens if a person withdraws £40,000, 4% of the original £1million, every year but keeps excess money the market may return to them invested.
+Then we can run a simulation to see what would happen to a Â£1million pound portfolio invested solely in the S&P500. We want to see what happens if a person withdraws Â£40,000, 4% of the original Â£1million, every year but keeps excess money the market may return to them invested.
 
 ```{r echo=TRUE}
 
@@ -428,7 +432,7 @@ results <- matrix(data = NA,
 #create a vector to store the % with net worth >0
 solvent <- vector(mode = "numeric",length = 50)
 
-# everybody starts with £100000
+# everybody starts with Â£100000
 results[1,] <- 1000000
 
 # Loop for 4%
