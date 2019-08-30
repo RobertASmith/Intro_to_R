@@ -107,6 +107,7 @@ If you have time before the course, it would be hugely beneficial to get familia
 
 ## Basics
 
+### Basic operations
 
 ```{r,echo=TRUE}
 # 1. basic basics
@@ -167,30 +168,6 @@ df
 
 df$bmi = df$weight / df$height^2 
 df
-```
-
-### More complex objects
-```{r,echo=TRUE}
-
-# index
-x
-x[1]
-x[2]
-#x[2,2] #error
-x[c(1,2)]
-x[1:4]
-
-df
-
-df$height
-df[1] # error   ## actually this isn't an error for me :)
-df[,1]
-df[2,]
-
-df$height[2]
-df[2,1]
-
-df$height[2] - df$height[1]
 ```
 
 ### Evaluations
@@ -258,7 +235,7 @@ c) Create a variable in the dataframe called life expectancy, set this to 83 for
 
 d) Create another variable called lyr (life years remaining) which is the number of years to life expectancy for each individual.
 
-## Understanding R. 
+## Understanding R. #SARAH
 
 ### Basic functions
 Functions can be applied to make data manipulation easier. Many functions are included in baseR. For example mean. Mean returns the arithmetic mean of a vector of numbers. We can find out more about mean by entering ?mean.
@@ -373,7 +350,9 @@ rm(list=ls())
 ls()
 ```
 
-### If Statements
+## Working with R. #Rob
+
+### If Statements  
 
 ### Loops
 There are numerous different ways to create loops, we are going to look at the simplist, the **for** loop which executes the command for each number given. 
@@ -417,6 +396,8 @@ print(ourdata)                # print the vector
 
 ```
 
+Likewise, we can do the opposite and take from a matrix.
+
 ### Custom Function
 
 ```{r,echo=TRUE}
@@ -437,7 +418,8 @@ C_F_converter(22,c_to_f = T)
 
 Creating all your functions from scratch is a lot of work, where others have previously created the same functions, why reinvent the wheel. Instead we can stand on the shoulders of others by downloading 'packages'. Importantly though, we must understand what the functions within these packages are doing!
 
-## Doing Research in R
+## Doing Research in R # Paul
+
 
 ### Importing Data
 
