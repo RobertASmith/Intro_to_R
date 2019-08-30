@@ -89,7 +89,9 @@ By the end of the 1 day short course, the attendee should be able to:
 \vspace{3.5in} 
 # Course 1
 
-### Install and navigate R Studio.
+\newpage
+
+## Install and navigate R Studio.
 
 R is a free software environment for statistical analysis and data science. It is a collaborative effort started by Robert Gentleman and Ross Ihaka in New Zealand, but now made up of hundreds of people. R is made freely available by the Comprehensive R archive Network (CRAN), in the UK it can be downloaded through the University of Bristol [here](https://www.stats.bris.ac.uk/R/). 
 
@@ -103,114 +105,275 @@ If you have time before the course, it would be hugely beneficial to get familia
 > Download R from <https://www.stats.bris.ac.uk/R/>.  
 > Download RStudio from <https://www.rstudio.com/products/rstudio/#Desktop>.
 
-### Using R to do basic calculations
+## Basics
 
-Anything you can do with a calculator, you can do in R.
 
 ```{r,echo=TRUE}
+# 1. basic basics
+1 + 1
 
-2+2
+12/4
+
+4^2 
 
 ```
 
-<- can be used to assign values to objects.
+### Objects Basics
 
 ```{r,echo=TRUE}
 
-a <- 2
-b <- 2
+# objects basics
+x = 3
+y = 5
+x + y
+ 
+x = 4
+x + y
+  
+z = x + y
+z
 
-a+b
 
 ```
 
+### Manipulations
+```{r,echo=TRUE}
 
-*Exercise*
+ 
+x.2 = x
+x.2
 
-Calculate the following, where a = 20 b = 9, c = 5, d = 1.2
+x.2 = x.2 + 1 
+x.2 
+x
+```
 
-You are only allowed to type each number once:
+### More complex objects
 
-$x <- 4b + 7c + 3d$
+```{r,echo=TRUE}
+
+height = c(1.72,1.78,1.65,1.90) # 1:4
+height
+
+weight = c(68,75,55,79)
+weight
+
+first_name = c("Alice","Bob","Harry","Jane")
+first_name
+#first_name + 1 # error
+
+df = data.frame(height,weight,first_name)
+df
+
+df$bmi = df$weight / df$height^2 
+df
+```
+
+### More complex objects
+```{r,echo=TRUE}
+
+# index
+x
+x[1]
+x[2]
+#x[2,2] #error
+x[c(1,2)]
+x[1:4]
+
+df
+
+df$height
+df[1] # error   ## actually this isn't an error for me :)
+df[,1]
+df[2,]
+
+df$height[2]
+df[2,1]
+
+df$height[2] - df$height[1]
+```
+
+### Evaluations
+```{r,echo=TRUE}
+
+# evaluations
+4 > 2
+4 > 5
+4 == 3
+4 != 3
+"x" == "x"
+```
+
+### Subsetting
+```{r,echo=TRUE}
+
+# subsetting
+df
+min_height = df$height >= 1.75
+min_height
+
+df.at_least_175 = df[min_height,]
+df.at_least_175
+
+
+smaller = df$height < 1.75
+df[smaller,]
+df[!min_height,]
+
+show_men = df$first_name %in% c("Harry","Bob")
+df[show_men,]
+
+# which(df$weight > 70)
+# df[which(df$weight > 70),]
+```
+
+
+### Exercises
+
+**Exercise 1**
+
+a) Calculate the following:
+
+5*10
+20/3
+
+b) Calculate x where a = 20 b = 9, c = 5, d = 1.2
+*you are only allowed to type each number once*
+
+$x = 4b + 7c + 3d$
+
+$x = \frac{8b + 4c -12d}{a}$
+
+
 
 ${12\times(a+b)}\over {x}$
 
+**Exercise 2**
 
-#### Functions
+a) Create a dataframe for five individuals (Andrew, Betty, Carl, Diane and Elisa) who are aged (62,80,24,40,56) and have gender (male, female, male,female, female). 
 
-Functions can be applied to make data manipulation easier. Many functions are included in baseR. For example the 'log' function takes the log of a number. We can start by looking up the help file and see that the default for base for log is exp(1).
+b) Use evaluations and subsetting to find the characteristics of the individual who can claim their free bus pass (age 65+).
 
-```{r,echo=TRUE,eval=FALSE}
-help(log)
+c) Create a variable in the dataframe called life expectancy, set this to 83 for females and 80 for males.
 
-# base exp(1) is the default
-log(x = 9,base = exp(1))
+d) Create another variable called lyr (life years remaining) which is the number of years to life expectancy for each individual.
+
+## Understanding R. 
+
+### Basic functions
+Functions can be applied to make data manipulation easier. Many functions are included in baseR. For example mean. Mean returns the arithmetic mean of a vector of numbers. We can find out more about mean by entering ?mean.
+
+```{r,echo=TRUE}
+# find out more about mean
+?mean
+
+# create a vector of numbers
+some_numbers = c(10,12,13,13,14,18,20)
+
+# find the arithmetic mean of the numbers
+average_value = mean(some_numbers)
+
+#return the numbers
+average_value
+```
+
+Other functions are more complex, requiring multiple inputs. For example **round** requires two inputs:
+      x)   a value or multiple values
+ digits)   the number of digits to round to. 
+
+```{r,echo=TRUE}
+# find more information about round
+?round
+
+# Rounding 5.7 to 0 digits gives 6.
+round(x = 5.7,digits = 0)
+
+# Rounding our average value to 2 digits gives 14.29.
+round(average_value,2)
+
+# We can do the same for multiple values
+round(c(12.25,15.63,14.42),1)
 
 ```
 
-But what we can change that base to be anything we want:
+Another useful function is sequence:
+
+This requires the number to start from (*from*), the number to finish at (*to*), and the interval between numbers (*by*) in the sequence. Alternatively, instead of *by* the length of the sequence can be set using *length.out*.
+
+```{r,echo=TRUE}
+# find out more about sequence
+?seq
+
+# create a sequence of odds from 1 to 21.
+seq(from = 1, to = 21, by = 2)
+
+# create a sequence of length 10 from 1 to 21
+seq(from = 1, to = 21, length.out = 10)
+```
+
+### Attributes
+```{r,echo=TRUE}
+
+# attributes
+df
+names(df)
+#rownames(df) = c("row 1","row 2","row3") # error
+rownames(df) = c("row 1","row 2","row3","row 4")
+df
+
+x
+length(x)
+
+
+str(df)
+dim(df)
+
+```
+
+### Classes
 
 ```{r,echo=TRUE}
 
-log(x=9, base = 3)
+# classes
+class(x)
+class("this is a sentence")
+class(df)
+
+# matrix(1:9,ncol=3,nrow=3)
+
+# the list
+My_list = list(my_df = df,
+               a_vector = x,
+               another_one = y,
+               some_text = c("foo","bar"))
+My_list
+
+My_list$a_vector
+
+My_list$my_df
+
+My_list[[1]]
+
+My_list[[1]]$height
+
+str(My_list)
+
+# NA, Nan, Inf
 
 ```
 
-
-### Importing Data
-
-In almost every case, you will want to import some data to analyse. This data will come in a variety of formats. R studio has a nice feature in Environment>Import_Dataset which enables you to select the file you wish to download (similar to STATA) from your computer. The data is then imported into R and the code available in the console.
-
-It is possible to import files in the following formats:
-
-|  Type  | Suffix     | 
-|--------|:----------:|
-| R      |.R          |
-| CSV    |.csv        |
-| Excel  |.xls/.xlsx  |
-| SPSS   |.spv        |
-| Stata  |.dta        |
-
-
-Alternatively packages can be installed to import data in almost any format. For example the ```readr``` package can read in spreadsheets from text files or tab delimited files.
-
-
-#### CSV
-We can import the file using the full path with the file name and suffix included such as below:
-
-```{r,echo=TRUE,eval=FALSE}
-read.csv("C:/Users/Robert/Google Drive/MyProject/Data/rawdata.csv", header=FALSE)
-```
-
-#### Setting Working Directory
-Or, if we know that we are going to be downloading a lot of files from one folder we can set a working directory. The working directory is the defined folder in which R will then import and export files from and to. This allows users to send whole files to others who can replicate the work by simply changing the working directory to the new file location.
-
-The current working directory can be found by typing:
-
+### Environment
 ```{r,echo=TRUE}
-getwd()
+# enviroment & wd
+ls()
+rm("y")
+ls()
+# attach(...)
+rm(list=ls())
+ls()
 ```
 
-A new working directory can be set by clicking on the tab (Session) then (Set_Working Directory), or by the command setwd:
-
-```{r,echo=TRUE,eval=FALSE}
-setwd(filename)
-```
-
-#### Downloading files from the internet
-
-Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
-
-```{r,echo=TRUE}
-# load the readr package, if this is not installed then install it.
-library(readr)
-
-#use the function read_csv
-data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
-```
-
-Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available. 
-
+### If Statements
 
 ### Loops
 There are numerous different ways to create loops, we are going to look at the simplist, the **for** loop which executes the command for each number given. 
@@ -254,6 +417,89 @@ print(ourdata)                # print the vector
 
 ```
 
+### Custom Function
+
+```{r,echo=TRUE}
+# my function
+C_F_converter = function(x,c_to_f = T){
+  if(c_to_f){
+    res = x * 9/5 + 32 
+  } else {
+    res = (x - 32) * 5/9
+  }
+  return(res)
+}
+
+C_F_converter(22,c_to_f = T)
+```
+
+### Packages
+
+Creating all your functions from scratch is a lot of work, where others have previously created the same functions, why reinvent the wheel. Instead we can stand on the shoulders of others by downloading 'packages'. Importantly though, we must understand what the functions within these packages are doing!
+
+## Doing Research in R
+
+### Importing Data
+
+In almost every case, you will want to import some data to analyse. This data will come in a variety of formats. R studio has a nice feature in Environment>Import_Dataset which enables you to select the file you wish to download (similar to STATA) from your computer. The data is then imported into R and the code available in the console.
+
+It is possible to import files in the following formats:
+
+|  Type  | Suffix     | 
+|--------|:----------:|
+| R      |.R          |
+| CSV    |.csv        |
+| Excel  |.xls/.xlsx  |
+| SPSS   |.spv        |
+| Stata  |.dta        |
+
+
+Alternatively packages can be installed to import data in almost any format. For example the readr package can read in spreadsheets from text files or tab delimited files.
+
+
+#### CSV
+We can import the file using the full path with the file name and suffix included such as below:
+
+```{r,echo=TRUE,eval=FALSE}
+read.csv("C:/Users/Robert/Google Drive/MyProject/Data/rawdata.csv", header=FALSE)
+```
+
+#### Setting Working Directory
+Or, if we know that we are going to be downloading a lot of files from one folder we can set a working directory. The working directory is the defined folder in which R will then import and export files from and to. This allows users to send whole files to others who can replicate the work by simply changing the working directory to the new file location.
+
+The current working directory can be found by typing:
+
+```{r,echo=TRUE}
+getwd()
+```
+
+A new working directory can be set by clicking on the tab (Session) then (Set_Working Directory), or by the command setwd:
+
+```{r,echo=TRUE,eval=FALSE}
+setwd(filename)
+```
+
+#### Downloading files from the internet
+
+Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
+
+```{r,echo=TRUE,eval=FALSE}
+# load the readr package, if this is not installed then install it.
+library(readr)
+
+#use the function read_csv
+data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
+```
+
+Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available. 
+
+### Summarising Data
+
+### Plotting Data
+
+### Basic Regression
+
+### Basic Simulation
 We can do much more complex calculations within loops, the sky is the limit, but here are two examples.
 
 **Example 1**
@@ -289,7 +535,7 @@ plot(v.val,type = "l")
 ```
 
 **Example 2**
-Example 2 records the survival of 1000 individuals who die with probability 0.1.
+Example 2 records the survival of 1000 individuals who die with probability 0.1 in any given year.
 
 ```{r echo=TRUE}
 
@@ -345,6 +591,7 @@ rm(list=ls())
 
 # load necessary pre-downloaded packages
 library(readxl)
+library(readr)
 library(fitdistrplus)
 
 # Read in data from source, an excel file using data from https://www.macrotrends.net/2526/sp-500-historical-annual-returns
@@ -422,7 +669,7 @@ legend('topleft',
 
 ```
 
-Then we can run a simulation to see what would happen to a £1million pound portfolio invested solely in the S&P500. We want to see what happens if a person withdraws £40,000, 4% of the original £1million, every year but keeps excess money the market may return to them invested.
+Then we can run a simulation to see what would happen to a £1million pound portfolio invested solely in the S&P500. We want to see what happens if a person withdraws 40,000, 4% of the original 1million, every year but keeps excess money the market may return to them invested.
 
 ```{r echo=TRUE}
 
@@ -503,24 +750,28 @@ The purpose of this example was not to provide financial advice, but to show how
 * Individuals may choose to spend less in recessions, or have alternative incomes.
 * Individuals will probably have more diversified portfolios.
 
-# Using R Markdown
+## Where to find further Information
+
+# Course 2
+
+## Using R Markdown
 This document has been created in R Markdown.
 
 It is possible to embed an R-Shiny App into an R-Markdown Document.
 
-#```{r fig.height=8, fig.width=8}
-#knitr::include_app(url = "https://iolmap.shinyapps.io/parkrun/")
-#```
+####```{r fig.height=8, fig.width=8}
+####knitr::include_app(url = "https://iolmap.shinyapps.io/parkrun/")
+####```
 
 Or just a simple website:
 
 ```{r fig.height=8, fig.width=8}
-knitr::include_url(url = "https://www.youtube.com/watch?v=KznAcOK7cTQ")
+#knitr::include_url(url = "https://www.youtube.com/watch?v=KznAcOK7cTQ")
 
 ```
-<iframe src="https://www.youtube.com/watch?v=KznAcOK7cTQ" style="border: none; width: 900px; height: 500px"></iframe>
+####<iframe src="https://www.youtube.com/watch?v=KznAcOK7cTQ" style="border: none; ####width: 900px; height: 500px"></iframe>
 
-# Creating an animation
+#### Creating an animation
 
 It is possible to create animations in R. For public health this may be best when trying to show how a relationship between two variables changes over time, allowing a x and y axis to be displayed for each time period and moving through time periods allowing the viewer to 'see' the relationship changing.
 
@@ -556,7 +807,7 @@ dev.off()
 animation <- image_animate(image = img, loop = 2,fps = 2)
 
 
-image_write(image = animation, path = "C:/Users/Robert/Desktop/Rcourse/Intro_to_R/Images/gapminder.gif")
+#image_write(image = animation, path = "C:/Users/Robert/Desktop/Rcourse/Intro_to_R/Images/gapminder.gif")
 
 ```
 
