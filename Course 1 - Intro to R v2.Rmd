@@ -4,21 +4,24 @@ author: "Robert Smith"
 date: "`r format(Sys.time(), '%d. %B %Y')`"
 output:
   
-  pdf_document: default
-  word_document: default
   html_document: default
+  word_document: default
+  pdf_document: default
 editor_options: 
   chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("C:/Users/Robert/Google Drive/Teaching/R Course/Intro_to_R")
 ```
 
 \newpage 
 
 \tableofcontents
+
+\newpage 
+
+
 
 \newpage 
 
@@ -35,6 +38,10 @@ Requirements: It is assumed that all participants on the course have their own l
 Paul Schneider ...
 
 Sarah Bates ...
+
+Thomas Bayley ...
+
+Naomi Gibbs ...
 
 \newpage
 
@@ -110,7 +117,7 @@ If you have time before the course, it would be hugely beneficial to get familia
 > Download R from <https://www.stats.bris.ac.uk/R/>.  
 > Download RStudio from <https://www.rstudio.com/products/rstudio/#Desktop>.
 
-## Basics   LED BY ROB.
+## Basics
 
 Our course starts in the R console, which those of you who are familiar with R but not RStudio will recognise. We will enter commands as input into the console, and receive output from the console. We will start with some simple basic operations, for which R is clearly very excessive.
 
@@ -118,76 +125,68 @@ Our course starts in the R console, which those of you who are familiar with R b
 Entering 1+1, we get the output [1] 2. The output is 2, but the [1] lets us know that the number 2 is the first number of output. If we had an output that was particularly large (e.g. 100 seperate numbers) then r may let us know that the first row displayed starts with the first value [1] and the second row starts with the [x]th value. 
 
 ```{r,echo=TRUE}
+
+rm(list = ls())
+
 # add 1 to 1. 
 1 + 1
 
 # divide 12 by 4
 12/4
 
-# Showing that the numbers in brackets show the number in the vector for the first number of the row.
-runif(n = 30,min = 0,max = 1) 
+# times 3 by 7
+3*7
 
+# 10 to the power 3
+10^3
+
+# root isn't a basic operation so we will look at later.
 ```
 
-### Objects Basics
-It is possible to create objects, and assign these objects some value (e.g. a number, a letter, a word, a time). We can then use these objects going forward rather than the values directly. Operations can be applied to these objects, and objects can be over-written.
+### Objects
+It is possible to create objects, an object can take a number of forms (e.g. a number, a vector of numbers, a matrix, a data-frame). We can then use these objects going forward rather than the values directly. Operations can be applied to these objects, and objects can be over-written. R is basically just objects and functions.
 
 ```{r,echo=TRUE}
 
 # objects basics
-x = 3
-y = 5
+x <-  3
+y <-  5
 x + y
  
-x = 4
+x <-  4
 x + y
   
-z = x + y
+z <- x + y
 z
-
 
 ```
 
-### Manipulations
+### Overwriting / Manipulating Objects
+
 ```{r,echo=TRUE}
 
  
-x.2 = x
-x.2
+a <- 10
+a
 
-x.2 = x.2 + 1 
-x.2 
-x
+a <- a + 1 
+a 
+
 ```
-Objects don't have to take a single value. For example a single object may be the heights of each child in a class of children (in the example below a small class of 4).
-We can store objects together in a data-frame. In our example data-frame each column is a variable (height, weight, first_name), and each row is an individual. 
-We can create a new variable in the dataframe by assigning a vector of values to that 'column'.
 
-### More complex objects
+**Exercises**
 
-```{r,echo=TRUE}
-
-height = c(1.72,1.78,1.65,1.90) # 1:4
-height
-
-weight = c(68,75,55,79)
-weight
-
-first_name = c("Alice","Bob","Harry","Jane")
-first_name
-#first_name + 1 # error
-
-df = data.frame(height,weight,first_name)
-df
-
-df$bmi = df$weight / df$height^2 
-df
-```
+set d equal to 10.
+divide d by 5
+multiply d by 8
+add 8 to d 
+what is d?
 
 ### Evaluations
 We can perform evaluations, which provide a true or false answer. For example the input 4>2 returns "FALSE". 
-These evaluations can be done on a single value, or multiple values in all kinds of structures (a scalar, a vector, a matrix, an array ...)
+
 It can be very useful in cases where an outcome is binary (e.g. an individual dies or remains alive). Or where we want to change a continous variable to a binary.
+
 ```{r,echo=TRUE}
 
 # simple evaluations
@@ -200,14 +199,95 @@ It can be very useful in cases where an outcome is binary (e.g. an individual di
 # 4 is not equal to 3, note != is not equal to.
 4 != 3
 # the character x is equal to the character x.
-"x" == "x"
-# show that evaluations can be undertaken on multple values, this returns the evaluation for each.
-x <- c(1,2,3)
-x == 1
+"dog" == "dog"
+"dog" == "cat"
+
 # the output from an evaluation can be stored as an object, x. This object can be subject to operations & manipulations.
-x <- 4<2
-# for example multiplication
-x*2
+b <- 4<2
+b
+```
+
+
+### Different object classes and types
+Objects don't have to take a single value. For example a single object may be the heights of each child in a group of children (in the example below a small class of 4).
+
+We have been working with single values, which are vectors of 1. To illustrate the different classes we are going to create some vectors.
+
+### Object Classes
+Different class include numeric, character, logical, integer & complex (ignore).
+```{r,echo=TRUE}
+
+# numeric
+height <- c(1.72,1.78,1.65,1.90) # 1:4
+height
+
+# numeric
+weight <- c(68,75,55,79)
+weight
+class(weight)
+
+# character
+first_name <- c("Alice","Bob","Harry","Jane")
+first_name
+#first_name + 1 # error
+
+# factor
+sex <- factor(x = c("F","M","M","F"))
+sex
+
+# logical
+tall <- height > 1.8
+```
+### Operations on different data structures
+
+#### Operations on Vectors
+
+```{r, echo=TRUE}
+#Adding:
+c(1,2,3) + 1
+c(1,2,3) + c(1,2,3)
+
+
+#multiplication
+heightft <- height*3.28
+
+
+```
+**Exercise**
+Create a vector called 'odds' with the numbers 1,3,5,7,9.
+Show what class odds is. 
+
+Evaluate which numbers in the odd vector are greater than 4. 
+
+Create a vector called 'fail' containing 1,3,5,'seven',9.
+Show what class fail is.
+
+Create a vector that gives everyone's weight in pounds (2.2lbs to kg)
+
+
+### Basic object Types
+
+There are multiple types of object in R. We can store objects together in a data-frame. In our example data-frame each column is a variable (height, weight, first_name), and each row is an individual. 
+
+Different object types include:
+
+Vector - single variable a 1x1 vector. Vector all elements same data-type. 
+Matrix - all same data-type.
+Dataframe - columns same data type.
+List - anything goes.
+
+```{r,echo=TRUE}
+
+# data frame- columns are variables, rows are observations.
+df <- data.frame(height,weight,first_name,sex)
+df
+
+# we can select a single variable within the dataframe using the dollar sign.
+df$height
+
+# We can add a new variable easily, in this case based on other variables within the dataframe.
+df$bmi <- df$weight / df$height^2 
+df
 ```
 
 ### Subsetting
@@ -217,7 +297,21 @@ We can subset our data, to reduce it to those we are interested in. This is usef
 # Our data-frame contains the height, weight, first name and bmi of 4 individuals.
 df
 
-# create a variable called min_height which contains T/F for each individual being over 175cm.
+#To subset a data frame we can use square brackets i.e df[row,column]
+#Selecting a column(s)
+df$height
+df[,"height"]
+df[,1]
+df[,1:3]
+df[,c(1,3)]
+
+#selecting a row(s)
+df[1,]
+
+#We might also want to select observations (rows) based on characteristics of the data
+#E.g. we might want to only look at the data for people who are taller than 1.75m
+
+#create a logical variable called min_height which contains T/F for each individual being over 175cm.
 min_height <- df$height >= 1.75
 min_height
 
@@ -225,27 +319,40 @@ min_height
 df.at_least_175 <- df[min_height,]
 df.at_least_175
 
+#People smaller than 1.75m
 # Subset the data to include only those who are not above min-height of 175cm.
 smaller = df$height < 1.75
 df[smaller,]
 df[!min_height,]
 
-# we can also subset using %in% which limits the dataset to those meeting criteria, e.g. those whose first name is "Harry" or "Bob".
-show_men = df$first_name %in% c("Harry","Bob")
-df[show_men,]
 
 ```
 Not that there are other more advanced methods, which uses pipes and require less code (these are covered in more advanced courses).
 
+**Exercises**
+select the 3rd row from the data frame
+
+Select the weight variable from the data frame using your prefered method
+
+Select alice's data from the data frame 
+
+Subset the data frame to show just the data for the females
+
+type df[,-1] what does this give
+
+
+
 ### Exercises
 
 **Exercise 1**
+Simple calculations
 
 a) Calculate the following:
 
 5*10
 20/3
 
+More complex calculations.
 b) Calculate x where a = 20 b = 9, c = 5, d = 1.2
 *you are only allowed to type each number once*
 
@@ -258,19 +365,33 @@ $x = \frac{8b + 4c -12d}{a}$
 ${12\times(a+b)}\over {x}$
 
 **Exercise 2**
+x <- c(10,30,4,52,60,7,8,10,12,15,14,17,19,20,25,30)
+a) Which numbers in x are above 8
+b) Which numbers are equal to 10.
+c) Which numbers are below 8 or above 30.
 
-a) Create a dataframe for five individuals (Andrew, Betty, Carl, Diane and Elisa) who are aged (62,80,24,40,56) and have gender (male, female, male,female, female). 
+d) Can you create a matrix with numbers and characters.
+        names <- c("Anne","Tom","Jamie","Max","Claire")
+        ages <- c(12,16,25,34,28)
+        cbind(names,ages)
+        What happens if you try to use the ages?
 
-b) Use evaluations and subsetting to find the characteristics of the individual who can claim their free bus pass (age 65+).
 
-c) Create a variable in the dataframe called life expectancy, set this to 83 for females and 80 for males.
+e) Create a dataframe for five individuals (Andrew, Betty, Carl, Diane and Elisa) who are aged (62,80,24,40,56) and have gender (male, female, male,female, female). 
 
-d) Create another variable called lyr (life years remaining) which is the number of years to life expectancy for each individual
+f) Use evaluations and subsetting to find the characteristics of the individual who can claim their free bus pass (age 65+).
+
+g) Create a variable in the dataframe called life expectancy, set this to 83 for females and 80 for males.
+
+h) Create another variable called lyr (life years remaining) which is the number of years to life expectancy for each individual
 
 \newpage 
 
 
 ## Understanding R. #SARAH
+
+### What is an R Script
+Show what an R Script is.
 
 ### Basic functions
 Functions can be applied to make data manipulation easier. Many functions are included in baseR. For example mean. Mean returns the arithmetic mean of a vector of numbers. We can find out more about mean by entering ?mean.
@@ -531,7 +652,8 @@ When creating custom functions it is important to ensure that you don't overwrit
 mean = function(x){
   print("You are a buffoon")
 }
-mean(c(15,10))
+mean(c(15,10,40,32,18))
+
 ```
 
 **Exercise 1**
@@ -596,24 +718,24 @@ A package can be installed from CRAN using the function *install.packages()* wit
 
 
 ```{r,echo=TRUE,eval=FALSE}
-install.packages("stats")
-devtools::install_github("hadley/babynames")
+#install.packages("stats")
+#devtools::install_github("hadley/babynames")
 ```
 
 To find more information about the babynames package you can type
 
 ```{r,echo=TRUE,eval=FALSE}
 
-help(package = "babynames")
+#help(package = "babynames")
 ```
 
 To load the downloaded package from the file it was downloaded to you can type:
 
 ```{r,echo=TRUE,eval=FALSE}
 
-library(babynames)
-ls("package:babynames")
-View(babynames)
+#library(babynames)
+#ls("package:babynames")
+#View(babynames)
 ```
 
 In this package there is just a dataset of baby names. However other packages allow you to do certain things. In many cases there are lots of different options. For example the rworldmap package contains data on country boundaries and enables the user to create custom maps. For a really simple map see the example below:
@@ -621,30 +743,30 @@ In this package there is just a dataset of baby names. However other packages al
 ```{r,echo=TRUE,eval=FALSE}
 #install.packages("rworldxtra")
 #install.packages("mapdata")
-library(rworldxtra)
+#library(rworldxtra)
 
-newmap <- getMap(resolution = "high")
-
-plot(newmap, 
-     xlim = c(-10, -2), 
-     ylim = c(50, 62), 
-     asp = 1)
-
-points(x = -1.480840, 
-       y= 53.380720, 
-       col = "red",
-       pch =  16, 
-       cex = 1)
-
-text(x = -1.480840, 
-     y = 53.380720,
-     labels = "Sheffield",
-     pos = 1,
-     col = "red")
+#newmap <- getMap(resolution = "high")
+#
+#plot(newmap, 
+#     xlim = c(-10, -2), 
+#     ylim = c(50, 62), 
+#     asp = 1)
+#
+#points(x = -1.480840, 
+#       y= 53.380720, 
+#       col = "red",
+#       pch =  16, 
+#       cex = 1)
+#
+#text(x = -1.480840, 
+#     y = 53.380720,
+#     labels = "Sheffield",
+#     pos = 1,
+#     col = "red")
 
 ```
 
-## Doing Research in R # Paul
+## Doing Research in R # Tom
 
 
 ### Importing Data
@@ -669,7 +791,7 @@ Alternatively packages can be installed to import data in almost any format. For
 We can import the file using the full path with the file name and suffix included such as below:
 
 ```{r,echo=TRUE,eval=FALSE}
-read.csv("C:/Users/Robert/Google Drive/MyProject/Data/rawdata.csv", header=FALSE)
+
 ```
 
 #### Setting Working Directory
@@ -697,19 +819,177 @@ Sometimes it is more practical to download files directly from the internet. The
 library(readr)
 
 #use the function read_csv
-data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
+#data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
 ```
 
 Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available. 
 
 ### Summarising Data
 
+Once we have our data read into R, we want to ensure that the data is as we would expect, in the correct format etc. 
+
+We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by chancing the function input.
+
+```{r,echo=TRUE,eval=FALSE}
+library(babynames)
+
+# head data with default 6 rows
+head(babynames)
+
+# head data with 10 rows
+head(babynames, n = 10)
+
+```
+We can summarise a dataset using the function *summary*. This shows us the length, class and Mode. If the class is numeric it will give some indication of the distribution by displaying min, median, mean, max. 
+
+```{r,echo=TRUE,eval=FALSE}
+
+# summarise the data, 
+summary(babynames)
+
+# summarise single variable
+summary(babynames$prop)
+
+```
+### Summarising
+Data-frames
+
+Summarise data-frame:
+
+```{r,echo=TRUE}
+# We can summarise our data-frame with height, weight, first name and BMI.
+summary(df)
+
+# The data-frame height variable is numeric, will return quantiles.
+summary(df$height)
+
+# The data-frame first-name lists the first name and number (character)
+summary(df$first_name)
+
+```
+
+We can use the output of the summary function to create objects. The summary of the year variable gives the quantiles. These can be stored as an object, here called temp (temporary object). If we just want any one number from the vector of quantiles we can define this in brackets. The script below creates two new objects, median and range.
+
+```{r,echo=TRUE,eval=FALSE}
+
+temp <- summary(babynames$year)
+
+Median  <- temp['Median']
+Range   <- temp['Max.'] - temp['Min.']
+
+```
+
 ### Plotting Data
+
+*Line Plot*
+It is also possible to plot the data provided. If we subset the babyname data, limiting the data to females called Mary we can plot the incidence in Marys over time. The function to do this is *plot*. Plot requires a vector of x and a vector of y. If x is not specified y is plotted against Index (1= first observation in index ... and so on).
+
+```{r,echo=TRUE,eval=FALSE}
+subname <- "Donald"
+temp <- subset(babynames,
+               name == subname & sex=="M")
+
+# a basic plot, just a scatter plot but with year on the x axis.
+#plot(y = temp$prop,
+#     x = temp$year)
+```
+
+However, this plot looks quite messy:
+
+1) It is lots of points rather than a line.
+2) We have weird axis names.
+3) The Y axis numbers are awkward.
+4) There is no title.
+
+```{r,echo=TRUE, fig.height=5, fig.width=8, r,echo=TRUE}
+
+plot(y = temp$prop*1000,
+     x = temp$year,
+     type = "l",
+     xlab = "Year",
+     ylab = paste(subname," per 1000"),
+     main = paste("Number of newborns named", subname, ", United States 1880 to 2017")
+    )
+```
+
+We can also plot a histogram of how prevalent a name is. The command *hist* does this.
+
+```{r,echo=TRUE, fig.height=5, fig.width=8, r,echo=TRUE}
+subname == "Matthew"
+
+temp <- subset(babynames,
+               name == subname & sex=="M")
+
+hist1 <- hist(temp$prop,breaks = seq(0,0.05,by=0.005))
+
+plot(hist1)
+
+# we can add a density line in simply using the function *density*.
+lines(density(x = temp$prop))
+
+```
 
 ### Basic Regression
 
+R is designed for statistical analysis. It therefore has simple inbuilt commands for regression. We can use an example dataset which has information about cars:
+
+```{r,echo=TRUE, fig.height=5, fig.width=8, r,echo=TRUE}
+
+plot(x = cars$speed,
+     y = cars$dist,
+     type = "p",
+     xlab = "speed",
+     ylab = "distance")
+
+# correlation is quite high:
+cor(cars$speed, cars$dist)
+
+# we can use a linear model to estimate the relationship between speed and distance. 
+lm_cars <- lm(dist ~ speed, data=cars) 
+
+# we can then print to see the intercept and beta.
+print(lm_cars)
+
+# we can see more information including std. error, p value etc here:
+summary(lm_cars)
+
+# As before, we can create an object with one part of this information by subsetting just the coefficients.
+lm_coeff <- summary(lm_cars)$coefficients
+
+# Then, for example if we want the intercept we can do:
+lm_coeff["(Intercept)","Estimate"]
+# Or the standard error of the speed:
+lm_coeff["speed", "Std. Error"]
+
+# we can predict distance from a set of speeds using predict. This command predicts the value of distance given a speed. We could do this simply using the equation Intercept + beta*Speed.
+dist_speed5 <- lm_coeff["(Intercept)","Estimate"] + lm_coeff["speed", "Estimate"]*5
+print(dist_speed5)
+
+# or by predicting from a dataframe
+speed <- 5
+df <- as.data.frame(speed) 
+
+distPred <- predict(lm_cars,
+                    newdata = df)
+print(distPred)
+
+# we can plot estimates derived using our original data by simply predicting and leaving out the new-data option:
+distPred <- predict(lm_cars)
+
+plot(x = cars$speed,
+     y= cars$dist)
+
+lines(x=cars$speed, 
+      y= distPred,col = "red")
+
+```
+
 ### Basic Simulation
+Sometimes we want to create a simple simulation, moving entities through time and having events occur. This is particularly useful in health economics.
+
+
 We can do much more complex calculations within loops, the sky is the limit, but here are two examples.
+
 
 **Example 1**
 Example 1 is an example of discounting each year simply by multiplying the previous year value by (1/(1+d.r)).
@@ -766,6 +1046,4 @@ for(i in 2:nrow(m.ind)) {
 plot(rowSums(m.ind),type="l")   # print the sums of the rows of the matrix (% alive)
 
 ```
-
-<P style="page-break-before: always">
 
