@@ -25,13 +25,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \newpage 
 
-## Introduction to R
+# Background
 This series of short courses are designed to equip the participant with a basic set of tools to undertake research using R. The aim is to create a strong foundation on which participants can build skills and knowledge specific to their research and consultancy objectives. The course makes use of the authors' experiences (many of which were frustrating) of working with R for data-science and statistical analysis. However there are many other resources available, and we would particularly recommend the freely available content at *[R for Data Science](https://r4ds.had.co.nz/)* as a good place to recap the materials taught in this course. The hard copy of Hadley Wickham and Garrett Grolemund's book of the same name (and content) is available at *[Amazon.com](https://r4ds.had.co.nz/)*. Alternatively, a user guide is available on the CRAN R-Project website [here](https://cran.r-project.org/doc/manuals/r-release/R-intro.html), although the author finds this less easy to follow than Hadley Wickham's book described above. Further details of where to go to answer more specific questions are provided throughout the course.
 
 Requirements: It is assumed that all participants on the course have their own laptop, and have previously used software such as Excel or SPSS. Some basic understanding of statistics and mathematics is required (e.g. mean, median, minimum, maximum).
 
 
-## Who we are:
+## Who are we:
 
 *[Robert Smith](https://www.linkedin.com/in/robert-smith-53b28438/)* is a PhD Candidate at ScHARR, funded by the Wellcome Trust Doctoral Training Centre in Public Health Economics and Decision Science. His focus is on the methods used to estimate the costs and benefits of public health interventions, with a specific interest in microsimulation modelling (done in R). He has become increasingly intersted in the use of R-Markdown and R-Shiny to make research more transparent and to aid decision makers. While doing his PhD, Robert has been involved in projects with the WHO, Parkrun and Western Park Sports Medicine.
 
@@ -97,7 +97,7 @@ By the end of the half day short course, the attendee should be able to:
 
 \vspace{3.5in} 
 
-<center> <h1> Course 1 - Introduction to R.</h1> </center>
+# Course 1 - Introduction to R
 
 
 ## Install and navigate R Studio.
