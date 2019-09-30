@@ -322,7 +322,7 @@ df[!min_height,]
 
 
 ```
-Not that there are other more advanced methods, which uses pipes and require less code (these are covered in more advanced courses).
+Note that there are other more advanced methods, which uses pipes and require less code (these are covered in more advanced courses).
 
 **Exercises**
 select the 3rd row from the data frame
@@ -379,6 +379,287 @@ f) Use evaluations and subsetting to find the characteristics of the individual 
 g) Create a variable in the dataframe called life expectancy, set this to 83 for females and 80 for males.
 
 h) Create another variable called lyr (life years remaining) which is the number of years to life expectancy for each individual
+
+## Working with Data in R
+
+### Keeping Track of progress in R
+So far we have been working exclusively in the R console. This is useful for trialing code and doing quick intial analyses, however, the code we have typed is not saved for when we might look back at it in the future. If we want to keep a permanent record of our code, the we do this using a r-script. An r-script is basically a text-file containing lines of r-code. Usually we create them from scratch within R, though they can be created by importing a text file from text editor. 
+
+The easiest way to create an r-file is by clicking the button in the top left corner of RStudion that looks like a piece of paper with a greenplus over it. 
+
+
+#### Setting Working Directory
+When we use R, it is always associated with a specific directory within our computer. The place that R is associated with is known as the working directory. The working directory is the default place where R will look when we try to import (export) objects into (to) R as well as the place that files are saved to. We can find out which directory R is pointed at by using the getwd() function:  
+
+```{r,echo=TRUE}
+
+getwd()
+
+```
+
+If you know that you will be reading and writing multiple files from and to the same folder, you can set the working directory to that folder. This can be useful when a project has many different r-files and associated items such as data, plots etc. In this case, one can set the working directory to the folder containing the files to make sure that everything stays in one place. It is also useful for when projects are shared between individuals using different computers, as setting the working directory to the shared folder prevents any isses that could arise from people using different ways to organise their work. 
+
+A new working directory can be set by clicking on the tab (Session) then (Set_Working Directory), or by the command setwd:
+
+```{r,echo=TRUE,eval=FALSE}
+
+# filename = "C:/Users/Robert/Documents"
+
+setwd(filename)
+
+```
+
+### Importing Data
+
+In almost every project, you will want to import some data to analyse. This data will come in a variety of formats. R studio has a nice feature in Environment>Import_Dataset which enables you to select the file you wish to download (similar to STATA) from your computer. The data is then imported into R and the code that R has used is displayed in the console.
+
+It is possible to import files in the following formats:
+
+
+|  Type  | Suffix     |
+
+|--------|:----------:|
+
+| R      |.R          |
+
+| CSV    |.csv        |
+
+| Excel  |.xls/.xlsx  |
+
+| SPSS   |.spv        |
+
+| Stata  |.dta        |
+
+
+If we want more control over the way that R imports the data we can also use the necessary commands in R directly. Some importnant examples of this are given in the next subsections.
+
+In addition, packages can be installed to import data in almost any format. For example the readr package can read in spreadsheets from text files or tab delimited files.
+
+
+#### CSV (Comma-seperated values)
+A common format of data that you will likely import is csv data. 
+
+We can import the file using the full path with the file name and suffix included such as below:
+
+
+```{r,echo=TRUE,eval=FALSE}
+car_data <- read.csv(file = "car_Data.csv", header = TRUE)
+ 
+
+```
+#### Downloading files from the internet
+
+Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
+
+
+```{r,echo=TRUE,eval=FALSE}
+
+# load the readr package, if this is not installed then install it.
+
+library(readr)
+
+ 
+
+#use the function read_csv
+
+#data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
+
+```
+
+ 
+
+Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available.
+
+ 
+
+### Summarising Data
+Once we have our data read into R, we want to ensure that the data is as we would expect, in the correct format etc.
+
+We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by chancing the function input.
+
+```{r,echo=TRUE,eval=FALSE}
+
+library(babynames)
+
+ 
+
+# head data with default 6 rows
+
+head(babynames)
+
+ 
+
+# head data with 10 rows
+
+head(babynames, n = 10)
+
+ 
+
+```
+
+We can summarise a dataset using the function *summary*. This shows us the length, class and Mode. If the class is numeric it will give some indication of the distribution by displaying min, median, mean, max.
+
+```{r,echo=TRUE,eval=FALSE}
+
+ 
+
+# summarise the data,
+
+summary(babynames)
+
+ 
+
+# summarise single variable
+
+summary(babynames$prop)
+
+ 
+
+```
+
+### Summarising
+
+Data-frames
+
+Summarise data-frame:
+```{r,echo=TRUE}
+
+# We can summarise our data-frame with height, weight, first name and BMI.
+
+#summary(df)
+
+ 
+
+# The data-frame height variable is numeric, will return quantiles.
+
+#(df$height)
+
+ 
+
+# The data-frame first-name lists the first name and number (character)
+
+#summary(df$first_name)
+
+ 
+
+```
+
+ 
+
+We can use the output of the summary function to create objects. The summary of the year variable gives the quantiles. These can be stored as an object, here called temp (temporary object). If we just want any one number from the vector of quantiles we can define this in brackets. The script below creates two new objects, median and range.
+
+```{r,echo=TRUE,eval=FALSE}
+
+ 
+
+temp <- summary(babynames$year)
+
+ 
+
+Median  <- temp['Median']
+
+Range   <- temp['Max.'] - temp['Min.']
+
+ 
+
+```
+
+
+### Plotting Data
+
+*Line Plot*
+
+It is also possible to plot the data provided. If we subset the babyname data, limiting the data to females called Mary we can plot the incidence in Marys over time. The function to do this is *plot*. Plot requires a vector of x and a vector of y. If x is not specified y is plotted against Index (1= first observation in index ... and so on).
+
+ 
+
+```{r,echo=TRUE,fig.height=5, fig.width=8}
+
+subname <- "Donald"
+
+temp <- subset(babynames,
+
+name == subname & sex=="M")
+
+temp <- as.data.frame(temp)
+
+ 
+
+# A basic plot, just a scatter plot but with year on the x axis.
+
+x <- temp[,"year"]
+
+y <- temp[,"prop"]
+
+ 
+
+plot(x = x, y = y)
+
+ 
+
+```
+
+ 
+
+However, this plot looks quite messy:
+
+ 
+
+1) It is lots of points rather than a line.
+
+2) We have weird axis names.
+
+3) The Y axis numbers are awkward.
+
+4) There is no title.
+
+ 
+
+```{r,echo=TRUE, fig.height=5, fig.width=8}
+
+ 
+
+plot(y = y*1000,
+
+x = x,
+
+type = "l",
+
+xlab = "Year",
+
+ylab = paste(subname," per 1000"),
+
+main = paste("Number of newborns named",
+
+subname, ", United States 1880 to 2017")
+
+)
+
+```
+
+ 
+
+We can also plot a histogram of how prevalent a name is over the whole period. The command *hist* does this.
+
+ 
+
+```{r,echo=TRUE, fig.height=5, fig.width=8}
+
+subname == "Matthew"
+
+ 
+
+temp <- subset(babynames,
+
+name == subname & sex=="M")
+
+ 
+
+hist1 <- hist(temp$prop,breaks = seq(0,0.05,by=0.005))
+
+ 
+
+plot(hist1)
 
 
 
