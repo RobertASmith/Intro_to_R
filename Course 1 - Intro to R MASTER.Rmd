@@ -443,7 +443,7 @@ We can import the file using the full path with the file name and suffix include
 
 
 ```{r,echo=TRUE,eval=FALSE}
-car_data <- read.csv(file = "car_Data.csv", header = TRUE)
+car_Data <- read.csv(file = "car_Data.csv", header = TRUE)
  
 
 ```
@@ -462,7 +462,7 @@ library(readr)
 
 #use the function read_csv
 
-#data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/Data/who_complete.csv")
+#car_data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/car_Data.csv", header = TRUE)
 
 ```
 
@@ -478,20 +478,15 @@ Once we have our data read into R, we want to ensure that the data is as we woul
 We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by chancing the function input.
 
 ```{r,echo=TRUE,eval=FALSE}
-
-library(babynames)
-
- 
-
 # head data with default 6 rows
 
-head(babynames)
+head(car_Data)
 
  
 
 # head data with 10 rows
 
-head(babynames, n = 10)
+head(car_Data, n = 10)
 
  
 
@@ -501,17 +496,14 @@ We can summarise a dataset using the function *summary*. This shows us the lengt
 
 ```{r,echo=TRUE,eval=FALSE}
 
- 
-
 # summarise the data,
 
-summary(babynames)
+summary(car_Data)
 
- 
 
 # summarise single variable
 
-summary(babynames$prop)
+summary(car_Data$mpg)
 
  
 
@@ -519,7 +511,7 @@ summary(babynames$prop)
 
 ### Summarising
 
-Data-frames
+Data-frames *(Do we need this section?)*
 
 Summarise data-frame:
 ```{r,echo=TRUE}
@@ -552,9 +544,7 @@ We can use the output of the summary function to create objects. The summary of 
 
  
 
-temp <- summary(babynames$year)
-
- 
+temp <- summary(car_data$mpg)
 
 Median  <- temp['Median']
 
@@ -569,49 +559,23 @@ Range   <- temp['Max.'] - temp['Min.']
 
 *Line Plot*
 
-It is also possible to plot the data provided. If we subset the babyname data, limiting the data to females called Mary we can plot the incidence in Marys over time. The function to do this is *plot*. Plot requires a vector of x and a vector of y. If x is not specified y is plotted against Index (1= first observation in index ... and so on).
+R also has wide ranging plotting capabilites. For basic plotting we can use the *plot* function. In this next example, we will prodcue a simple plot of miles per gallon vs engine displacement in our data set to see what the relationship between the variables.  
 
  
 
 ```{r,echo=TRUE,fig.height=5, fig.width=8}
+#plot of mpg vs disp
+plot(x = car_Data$disp, y = car_Data$mpg)
 
-subname <- "Donald"
+#notice we can remove arguments and still get same result
+plot(car_Data$disp, car_Data$mpg)
 
-temp <- subset(babynames,
-
-name == subname & sex=="M")
-
-temp <- as.data.frame(temp)
-
- 
-
-# A basic plot, just a scatter plot but with year on the x axis.
-
-x <- temp[,"year"]
-
-y <- temp[,"prop"]
-
- 
-
-plot(x = x, y = y)
 
  
 
 ```
 
- 
-
-However, this plot looks quite messy:
-
- 
-
-1) It is lots of points rather than a line.
-
-2) We have weird axis names.
-
-3) The Y axis numbers are awkward.
-
-4) There is no title.
+Whilst this plot is useful, it is quite basic. We make the plot more informative by specifying extra features that we want when we call the plot function. We can add labels, titles, lines of best fit and more.
 
  
 
@@ -619,47 +583,36 @@ However, this plot looks quite messy:
 
  
 
-plot(y = y*1000,
+plot(x = car_Data$disp, y = car_Data$mpg, 
+     type = "b", 
+     xlab = "Displacement", 
+     ylab = "Miles per Gallon",
+     main = "MPG vs Engine Displacement")
 
-x = x,
 
-type = "l",
-
-xlab = "Year",
-
-ylab = paste(subname," per 1000"),
-
-main = paste("Number of newborns named",
-
-subname, ", United States 1880 to 2017")
-
-)
 
 ```
 
  
-
-We can also plot a histogram of how prevalent a name is over the whole period. The command *hist* does this.
+Sometimes we may just want to see how the distribution of the data is for a single variable. For numerical variables this is done easily by using plotting a histogram. To plot a histogram in R we use the command *hist*.
 
  
 
 ```{r,echo=TRUE, fig.height=5, fig.width=8}
 
-subname == "Matthew"
+hist1 <- hist(car_Data$mpg)
 
- 
+#We can alter the 'bins' by specifying the additional argument 'breaks = ' in the hist function
+hist(car_Data$mpg, breaks = c(10,12.5,15,17.5,20,22.5,25,27.5,30,32.5,35))
 
-temp <- subset(babynames,
+#a neater way of doing the same as above is to use seq
+hist(car_Data$mpg, breaks = seq(10,35, by = 2.5))
 
-name == subname & sex=="M")
-
- 
-
-hist1 <- hist(temp$prop,breaks = seq(0,0.05,by=0.005))
-
- 
-
-plot(hist1)
+#we can again edit the title etc by adding extra arguments
+hist(car_Data$mpg, 
+     breaks = seq(10,35, by = 2.5),
+     xlab = "Miles per gallon",
+     main = "Histogram of Miles per Gallon")
 
 
 
