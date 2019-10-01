@@ -1,3 +1,4 @@
+
 ---
 title: \vspace{3.5in} "Putting the R in ScHARR"
 author: "Robert Smith"
@@ -35,9 +36,9 @@ Requirements: It is assumed that all participants on the course have their own l
 
 *[Robert Smith](https://www.linkedin.com/in/robert-smith-53b28438/)* is a PhD Candidate at ScHARR, funded by the Wellcome Trust Doctoral Training Centre in Public Health Economics and Decision Science. His focus is on the methods used to estimate the costs and benefits of public health interventions, with a specific interest in microsimulation modelling (done in R). He has become increasingly intersted in the use of R-Markdown and R-Shiny to make research more transparent and to aid decision makers. While doing his PhD, Robert has been involved in projects with the WHO, Parkrun and Western Park Sports Medicine.
 
-*[Paul Schneider](https://www.sheffield.ac.uk/scharr/staff-pgrs/studentprofiles/paulschneider)* ...
+*[Paul Schneider](https://www.sheffield.ac.uk/scharr/staff-pgrs/studentprofiles/paulschneider)* joined ScHARR as a PhD candidate in 2018. He is working on conceptual and methodological problems in valuing health outcomes in economic evaluations. A medical doctor and epidemiologist by training, he has used R in various research projects, ranging from the modeling costs of breast cancer, and value of information analyses, to the monitoring of influenza in real-time using online data. He is a keen advocate of open science practices.
 
-*[Sarah Bates](https://www.linkedin.com/in/sarah-elizabeth-bates-647ab9145/)* ...
+*[Sarah Bates](https://www.linkedin.com/in/sarah-elizabeth-bates-647ab9145/)* Sarah Bates is a PhD Candidate at ScHARR, funded by the Wellcome Trust Doctoral Training Centre in Public Health Economics and Decision Science. Sarah is examining the role of psychological factors in weight trajectories during and after a weight management intervention, and how these factors can be used to inform weight trajectories in a health economic model of obesity. Sarah is using microsimulation modelling in R throughout her PhD. 
 
 *[Thomas Bayley](https://www.linkedin.com/in/tom-bayley-31ba8570/)* ...
 
@@ -383,9 +384,25 @@ h) Create another variable called lyr (life years remaining) which is the number
 ## Working with Data in R
 
 ### Keeping Track of progress in R
-So far we have been working exclusively in the R console. This is useful for trialing code and doing quick intial analyses, however, the code we have typed is not saved for when we might look back at it in the future. If we want to keep a permanent record of our code, the we do this using a r-script. An r-script is basically a text-file containing lines of r-code. Usually we create them from scratch within R, though they can be created by importing a text file from text editor. 
+So far we have been working exclusively in the R console. This is useful for trialing code and doing quick intial analyses, however, the code we have typed is not saved for when we might look back at it in the future. If we want to keep a permanent record of our code, we can do this using a r-script. An r-script is basically a text-file containing lines of r-code. Usually we create them from scratch within R, though they can be created by importing a text file from text editor. 
 
-The easiest way to create an r-file is by clicking the button in the top left corner of RStudion that looks like a piece of paper with a greenplus over it. 
+The easiest way to create an r-file is by clicking the button in the top left corner of RStudion that looks like a piece of paper with a greenplus over it. The use of # for commenting is common. For example below
+
+```{r,echo=TRUE,eval=FALSE}
+
+getwd()      # this line of code sets the working directory.
+
+paste("RRRRR")  # this line of code pastes RRRRR.
+
+# One is enough, but sometimes I can use a few to make the code tidy, like below.
+
+#====
+# Section 1
+#====
+
+
+```
+
 
 
 #### Setting Working Directory
@@ -397,15 +414,15 @@ getwd()
 
 ```
 
-If you know that you will be reading and writing multiple files from and to the same folder, you can set the working directory to that folder. This can be useful when a project has many different r-files and associated items such as data, plots etc. In this case, one can set the working directory to the folder containing the files to make sure that everything stays in one place. It is also useful for when projects are shared between individuals using different computers, as setting the working directory to the shared folder prevents any isses that could arise from people using different ways to organise their work. 
+If you know that you will be reading and writing multiple files from and to the same folder, you can set the working directory to that folder. This can be useful when a project has many different r-files and associated items such as data, functions, plots etc. In this case, one can set the working directory to the folder containing the files to make sure that everything stays in one place. It is also useful for when projects are shared between individuals using different computers, as setting the working directory to the shared folder prevents any isses that could arise from people organising their files in different ways. 
 
-A new working directory can be set by clicking on the tab (Session) then (Set_Working Directory), or by the command setwd:
+A new working directory can be set by clicking on the tab (Session) then (Set_Working Directory), or by the command setwd. Below I give the example of setting the working directory to my documents. 
 
 ```{r,echo=TRUE,eval=FALSE}
 
-# filename = "C:/Users/Robert/Documents"
+ filename = "C:/Users/Robert/Google Drive/Teaching/R Course/Intro_to_R"
 
-setwd(filename)
+ setwd(filename)
 
 ```
 
@@ -417,34 +434,49 @@ It is possible to import files in the following formats:
 
 
 |  Type  | Suffix     |
-
 |--------|:----------:|
-
 | R      |.R          |
-
 | CSV    |.csv        |
-
 | Excel  |.xls/.xlsx  |
-
 | SPSS   |.spv        |
-
 | Stata  |.dta        |
 
 
-If we want more control over the way that R imports the data we can also use the necessary commands in R directly. Some importnant examples of this are given in the next subsections.
+If we want more control over the way that R imports the data we can also use the necessary commands in R directly. Some important examples of this are given in the next subsections.
 
 In addition, packages can be installed to import data in almost any format. For example the readr package can read in spreadsheets from text files or tab delimited files.
 
 
 #### CSV (Comma-seperated values)
-A common format of data that you will likely import is csv data. 
+A common format of data that you will likely import is comma-seperated values (CSV) data.Data is seperated by commas in rows. For example:
 
-We can import the file using the full path with the file name and suffix included such as below:
+Age,Name,Sex,  
+30,Richard,Male,  
+27,Hazel,Female,  
+28,Louise,"",  
+
+Creates:
+
+|  Age  | Name     | Sex     |
+|-------|:--------:|:-------:|
+| 30    |Richard   | Male    |
+| 27    |Hazel     | Female  |
+| 28    |Louise    |         |
 
 
-```{r,echo=TRUE,eval=FALSE}
-car_Data <- read.csv(file = "car_Data.csv", header = TRUE)
+
+We can import the file using the full path with the file name and suffix included such as below. This will look in the working directory for the file specified, so given our working directory is "C:/Users/Robert/Documents" R will look in the Documents folder for the file "car_Data.csv". 
+
+It will then convert the first row to be the header of the data. There are numerous other options which we will skip for now.
+
+
+```{r,echo=TRUE}
  
+# car_Data <- read.csv(file = "car_Data.csv", header = TRUE)
+
+# if you couldn't get that to work don't worry, this is an example dataset from base R.
+car_Data <- mtcars
+
 
 ```
 #### Downloading files from the internet
@@ -458,11 +490,9 @@ Sometimes it is more practical to download files directly from the internet. The
 
 library(readr)
 
- 
-
 #use the function read_csv
 
-#car_data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/car_Data.csv", header = TRUE)
+car_Data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/master/car_Data.csv", header = TRUE)
 
 ```
 
@@ -470,22 +500,18 @@ library(readr)
 
 Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available.
 
- 
-
 ### Summarising Data
 Once we have our data read into R, we want to ensure that the data is as we would expect, in the correct format etc.
 
 We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by chancing the function input.
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,echo=TRUE,eval=TRUE}
 # head data with default 6 rows
-
 head(car_Data)
 
  
 
 # head data with 10 rows
-
 head(car_Data, n = 10)
 
  
@@ -494,7 +520,7 @@ head(car_Data, n = 10)
 
 We can summarise a dataset using the function *summary*. This shows us the length, class and Mode. If the class is numeric it will give some indication of the distribution by displaying min, median, mean, max.
 
-```{r,echo=TRUE,eval=FALSE}
+```{r,echo=TRUE,eval=TRUE}
 
 # summarise the data,
 
@@ -509,42 +535,14 @@ summary(car_Data$mpg)
 
 ```
 
-### Summarising
 
-Data-frames *(Do we need this section?)*
+We can use the output of the summary function to create objects. The summary of the mpg variable gives the quantiles. These can be stored as an object, here called temp (temporary object). If we just want any one number from the vector of quantiles we can define this in brackets. The script below creates two new objects, median and range.
 
-Summarise data-frame:
-```{r,echo=TRUE}
-
-# We can summarise our data-frame with height, weight, first name and BMI.
-
-#summary(df)
+```{r,echo=TRUE,eval=TRUE}
 
  
 
-# The data-frame height variable is numeric, will return quantiles.
-
-#(df$height)
-
- 
-
-# The data-frame first-name lists the first name and number (character)
-
-#summary(df$first_name)
-
- 
-
-```
-
- 
-
-We can use the output of the summary function to create objects. The summary of the year variable gives the quantiles. These can be stored as an object, here called temp (temporary object). If we just want any one number from the vector of quantiles we can define this in brackets. The script below creates two new objects, median and range.
-
-```{r,echo=TRUE,eval=FALSE}
-
- 
-
-temp <- summary(car_data$mpg)
+temp <- summary(car_Data$mpg)
 
 Median  <- temp['Median']
 
@@ -571,8 +569,6 @@ plot(x = car_Data$disp, y = car_Data$mpg)
 plot(car_Data$disp, car_Data$mpg)
 
 
- 
-
 ```
 
 Whilst this plot is useful, it is quite basic. We make the plot more informative by specifying extra features that we want when we call the plot function. We can add labels, titles, lines of best fit and more.
@@ -594,7 +590,7 @@ plot(x = car_Data$disp, y = car_Data$mpg,
 ```
 
  
-Sometimes we may just want to see how the distribution of the data is for a single variable. For numerical variables this is done easily by using plotting a histogram. To plot a histogram in R we use the command *hist*.
+Sometimes we may just want to see the distribution of a single variable in the data. For numerical variables this is done easily by using plotting a histogram. To plot a histogram in R we use the command *hist*.
 
  
 
@@ -615,4 +611,6 @@ hist(car_Data$mpg,
      main = "Histogram of Miles per Gallon")
 
 
+
+```
 
