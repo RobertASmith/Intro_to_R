@@ -118,7 +118,9 @@ If you have time before the course, it would be hugely beneficial to get familia
 
 ## Basics
 
-Our course starts in the R console, which those of you who are familiar with R but not RStudio will recognise. We will enter commands as input into the console, and receive output from the console. We will start with some simple basic operations, for which R is clearly very excessive.
+R studio contains four panels: a script panel where you can save your code ( we will introduce this later so to begin there will just be three panels), a console where you can enter and run your code and where the outputs are displayed, an 
+environment which lists the objects you create, and another window which includes help, files and displays any plots you create.
+Our course starts in the R console , which those of you who are familiar with R but not RStudio will recognise. We will enter commands as input into the console, and receive output from the console. We will start with some simple basic operations, for which R is clearly very excessive.
 
 ### Basic operations
 Entering 1+1, we get the output [1] 2. The output is 2, but the [1] lets us know that the number 2 is the first number of output. If we had an output that was particularly large (e.g. 100 seperate numbers) then r may let us know that the first row displayed starts with the first value [1] and the second row starts with the [x]th value. 
@@ -210,10 +212,11 @@ b
 ### Different object classes and types
 Objects don't have to take a single value. For example a single object may be the heights of each child in a group of children (in the example below a small class of 4).
 
-We have been working with single values, which are vectors of 1. To illustrate the different classes we are going to create some vectors.
+We have been working with single values, which are vectors of 1. To illustrate the different classes we are going to create some vectors which we will then join together later
+to make a dataframe.
 
 ### Object Classes
-Different class include numeric, character, logical, integer & complex (ignore).
+Different class include numeric, character, factor, logical, integer & complex (ignore).
 ```{r,echo=TRUE}
 
 # numeric
@@ -261,7 +264,6 @@ Create a vector called 'fail' containing 1,3,5,'seven',9.
 Show what class fail is.
 
 Create a vector that gives everyone's weight in pounds (2.2lbs to kg)
-
 
 ### Basic object Types
 
@@ -319,7 +321,7 @@ df.at_least_175
 
 #People smaller than 1.75m
 # Subset the data to include only those who are not above min-height of 175cm.
-smaller = df$height < 1.75
+smaller <- df$height < 1.75
 df[smaller,]
 df[!min_height,]
 
@@ -388,7 +390,7 @@ h) Create another variable called lyr (life years remaining) which is the number
 ### Keeping Track of progress in R
 So far we have been working exclusively in the R console. This is useful for trialing code and doing quick intial analyses, however, the code we have typed is not saved for when we might look back at it in the future. If we want to keep a permanent record of our code, we can do this using a r-script. An r-script is basically a text-file containing lines of r-code. Usually we create them from scratch within R, though they can be created by importing a text file from text editor. 
 
-The easiest way to create an r-file is by clicking the button in the top left corner of RStudion that looks like a piece of paper with a greenplus over it. The use of # for commenting is common. For example below
+The easiest way to create an r-file is by clicking the button in the top left corner of RStudio that looks like a piece of paper with a green plus over it. The use of # for commenting is common. For example below
 
 ```{r,echo=TRUE,eval=FALSE}
 
@@ -408,7 +410,7 @@ paste("RRRRR")  # this line of code pastes RRRRR.
 
 
 #### Setting Working Directory
-When we use R, it is always associated with a specific directory within our computer. The place that R is associated with is known as the working directory. The working directory is the default place where R will look when we try to import (export) objects into (to) R as well as the place that files are saved to. We can find out which directory R is pointed at by using the getwd() function:  
+When we use R, it is always associated with a specific directory within our computer. The place that R is associated with is known as the working directory. The working directory is the default place where R will look when we try to import (export) objects into R as well as the place that files are saved to. We can find out which directory R is pointed at by using the getwd() function:  
 
 ```{r,echo=TRUE}
 
@@ -446,8 +448,7 @@ It is possible to import files in the following formats:
 
 If we want more control over the way that R imports the data we can also use the necessary commands in R directly. Some important examples of this are given in the next subsections.
 
-In addition, packages can be installed to import data in almost any format. For example the readr package can read in spreadsheets from text files or tab delimited files.
-
+In addition, packages can be installed to import data in almost any format. Packages are collections of R functions and code in an organised framework. The directory where packages are stored on your computer is called the library. For example the readr package which allows for easier reading of data can be installed from the internet using the code *install.packages("readr")*, then loaded into R using *library(readr)*.
 
 #### CSV (Comma-seperated values)
 A common format of data that you will likely import is comma-seperated values (CSV) data.Data is seperated by commas in rows. For example:
@@ -466,7 +467,6 @@ Creates:
 | 28    |Louise    |         |
 
 
-
 We can import the file using the full path with the file name and suffix included such as below. This will look in the working directory for the file specified, so given our working directory is "C:/Users/Robert/Documents" R will look in the Documents folder for the file "car_Data.csv". 
 
 It will then convert the first row to be the header of the data. There are numerous other options which we will skip for now.
@@ -483,7 +483,7 @@ car_Data <- mtcars
 ```
 #### Downloading files from the internet
 
-Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Here we are going to download some data from the github page for the course.
+Sometimes it is more practical to download files directly from the internet. There are lots of different packages out there to do this. The one I use was developed by Hadley Wickham, called readr. Below we are going to download some data from the course github page. Github is a hosting service for source code (in this case R code), it allows users to store code, data and other files. This aids version control, collaboration, replication and consistency of material over time, 
 
 
 ```{r,echo=TRUE,eval=FALSE}
@@ -498,14 +498,12 @@ car_Data <- read_csv("https://raw.githubusercontent.com/RobertASmith/Intro_to_R/
 
 ```
 
- 
-
 Downloading files directly to R within the same script as the analysis can be useful since it reduces the risk of you accidently changing the file. Just be careful that the data will always be available.
 
 ### Summarising Data
 Once we have our data read into R, we want to ensure that the data is as we would expect, in the correct format etc.
 
-We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by chancing the function input.
+We can use the function *head* to look at the first 6 number of lines of the data. We can specify a different number of lines by changing the function input.
 
 ```{r,echo=TRUE,eval=TRUE}
 # head data with default 6 rows
@@ -542,15 +540,11 @@ We can use the output of the summary function to create objects. The summary of 
 
 ```{r,echo=TRUE,eval=TRUE}
 
- 
-
 temp <- summary(car_Data$mpg)
 
 Median  <- temp['Median']
 
 Range   <- temp['Max.'] - temp['Min.']
-
- 
 
 ```
 
@@ -575,8 +569,6 @@ plot(car_Data$disp, car_Data$mpg)
 
 Whilst this plot is useful, it is quite basic. We make the plot more informative by specifying extra features that we want when we call the plot function. We can add labels, titles, lines of best fit and more.
 
- 
-
 ```{r,echo=TRUE, fig.height=5, fig.width=8}
 
  
@@ -591,10 +583,7 @@ plot(x = car_Data$disp, y = car_Data$mpg,
 
 ```
 
- 
 Sometimes we may just want to see the distribution of a single variable in the data. For numerical variables this is done easily by using plotting a histogram. To plot a histogram in R we use the command *hist*.
-
- 
 
 ```{r,echo=TRUE, fig.height=5, fig.width=8}
 
