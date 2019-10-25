@@ -1,7 +1,7 @@
 
 ---
 title: \vspace{3.5in} "Putting the R in ScHARR"
-author: "Robert Smith"
+author: "Robert Smith Naomi Gibbs, Thomas Bayley, Paul Schneider, Amy Chang, Sarah Bates"
 date: "`r format(Sys.time(), '%d. %B %Y')`"
 output:
   
@@ -489,7 +489,7 @@ Sometimes it is more practical to download files directly from the internet. The
 ```{r,echo=TRUE,eval=FALSE}
 
 # load the readr package, if this is not installed then install it.
-
+#install.packages("readr")
 library(readr)
 
 #use the function read_csv
