@@ -123,11 +123,10 @@ environment which lists the objects you create, and another window which include
 Our course starts in the R console , which those of you who are familiar with R but not RStudio will recognise. We will enter commands as input into the console, and receive output from the console. We will start with some simple basic operations, for which R is clearly very excessive.
 
 ### Basic operations
+
 Entering 1+1, we get the output [1] 2. The output is 2, but the [1] lets us know that the number 2 is the first number of output. If we had an output that was particularly large (e.g. 100 seperate numbers) then r may let us know that the first row displayed starts with the first value [1] and the second row starts with the [x]th value. 
 
 ```{r,echo=TRUE}
-
-rm(list = ls())
 
 # add 1 to 1. 
 1 + 1
@@ -212,8 +211,7 @@ b
 ### Different object classes and types
 Objects don't have to take a single value. For example a single object may be the heights of each child in a group of children (in the example below a small class of 4).
 
-We have been working with single values, which are vectors of 1. To illustrate the different classes we are going to create some vectors which we will then join together later
-to make a dataframe.
+We have been working with single values, which are vectors of 1. To illustrate the different classes we are going to create some vectors which we will then join together later to make a dataframe.
 
 ### Object Classes
 Different class include numeric, character, factor, logical, integer & complex (ignore).
@@ -354,15 +352,11 @@ a) Calculate the following:
 
 More complex calculations.
 b) Calculate x where a = 20 b = 9, c = 5, d = 1.2
-*you are only allowed to type each number once*
 
 $x = 4b + 7c + 3d$
 
 $x = \frac{8b + 4c -12d}{a}$
 
-
-
-${12\times(a+b)}\over {x}$
 
 **Exercise 2**
 x <- c(10,30,4,52,60,7,8,10,12,15,14,17,19,20,25,30)
