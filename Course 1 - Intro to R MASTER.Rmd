@@ -605,3 +605,37 @@ hist(car_Data$mpg,
 
 ```
 
+### Troubleshooting in R
+#### Errors
+When doing any sort of programming work, things often don't perfectly on the first try. Unfortunately, making mistakes and learning from them is an important part of becomming a better programmer. The process of troubleshooting generally follows 4 main steps:
+
+1. Read the error message. Sometimes it will be obvious what the error is from the message itself allowing you to quickly go back to your code and correct it.
+
+2. Read the R documentation. If the error has arisen whilst using a particular function or package then the documentation for those functions and packages will often have all the answers you need to solve your issue. Reading help files is an importnant part of gaining a better understanding of R so don't skip this step, however tempting it is.
+
+3. Go on the internet. There are many useful places on the internet to get help with any issues you encounter. Copying the error message into a google search will often reveal that someone else has had the same issue as yourself, and more often than not there will be myriad solutions for you to implement from other helpful R users. StackOverflow is a particularly useful place to go looking for help.
+
+4. Ask for help directly. If no solutions for your issue (or one that is similar enough for you to work out how to solve it on your own) have been found then you can ask directly to places like StackOverflow for help. Bear in mind that you will need to create a simpler version of your code with just enough in it to re-create the error. People wont read thorugh thousadns of lines to help sort your error! 
+
+More detail on these steps can be found at [link](http://rpubs.com/Altruimetavasi/Troubleshooting-in-R) and there are many other resources online that can help for any issues that you might encounter.
+
+```{r}
+hist(car_Data$Mpg)
+
+hist(as.factor(car_Data$cyl))
+
+```
+#### Advice for R skill building
+Naturally at some point you will be faced with the challenge of doing something in R that you have have not done before, and so is outside your current skill level. The process for learning this new capability is very similar to that of trouble shooting:
+
+1. First, ask can you use the functions and packages that you have already in your R reportoire to solve the issue? Trying to solve your issue this way first will deepen your understanding the capabilites of R and each package and function within it. This step will likely involve lost of reading of R documentation, so don't be tempted to skip this step!
+
+2. If you have tried this but you are just getting errors then go through stages 1 and 2 of the troubleshooting procedures outlined above.
+
+3. If doing steps 1 and 2 still has not brought you any success, then it's time to go searching the internet for help. A quick google search of what you want to do will often reveal multiple ways to do whatever it is your trying, and again places like stack overflow are very helpful for this. 
+
+It is tempting to skip straight to step three at times (and we would be lying if we said we didn't sometimes do it ourselves) but it's better to resist. Doing steps 1 and 2 will allow you to work out which of the solutions available online is best for you, and the greater understanding you develop by taking this longer route will make you a better programmer in the long run, as you are more likely to understand the solutions given to you online. Overall this will open up the pathway to speedier problem solving in your code. Copying coded solutions off the internet to put in your work without understanding the limitations of your attempts or the how the solutions work may produce immediate results but at the sacrifice of your development as a programmer.
+
+
+
+
