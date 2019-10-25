@@ -605,6 +605,54 @@ hist(car_Data$mpg,
 
 ```
 
+**Excercises**
+1.Exercise 1
+ + Load the iris dataset from base R into an object called flowerData by running the code 'flowerData <- iris'
+ + Output the first 10 rows of the data
+ + What class of object does each variable belong to?
+ + Plot a seperate histogram of the sepal length for each species. Add a title and labels to each so that you know which is which.
+ + Do you see any large differences between the distributions? (Try changing the 'breaks' argument to see if this makes things clearer)
+
+```{r, echo=FALSE}
+#1a 
+flowerData <- iris
+
+#1b
+head(flowerData, 10)
+
+#1c
+str(flowerData)
+#Can also just use class(flowerData$Sepal.Width) etc
+
+#1d
+histSetosa <- hist(flowerData[flowerData$Species == "setosa",]$Sepal.Length,
+                   main = "Histogram of Setosa Sepal length", 
+                   xlab = "Sepal length" )
+histVers <- hist(flowerData[flowerData$Species == "versicolor",]$Sepal.Length,
+                 main = "Histogram of Versicolor Sepal length", 
+                   xlab = "Sepal length")
+histVirg<- hist(flowerData[flowerData$Species == "virginica",]$Sepal.Length,
+                main = "Histogram of Virginica Sepal length", 
+                   xlab = "Sepal length")
+
+#1e
+histSetosa <- hist(flowerData[flowerData$Species == "setosa",]$Sepal.Length,
+                   main = "Histogram of Setosa Sepal length", 
+                   xlab = "Sepal length",
+                   breaks = 10)
+histVers <- hist(flowerData[flowerData$Species == "versicolor",]$Sepal.Length,
+                 main = "Histogram of Versicolor Sepal length", 
+                   xlab = "Sepal length",
+                 breaks = 10)
+histVirg<- hist(flowerData[flowerData$Species == "virginica",]$Sepal.Length,
+                main = "Histogram of Virginica Sepal length", 
+                   xlab = "Sepal length",
+                breaks = 10)
+
+#Choosing higher numbers can make things too confusing!
+
+```
+
 ### Troubleshooting in R
 #### Errors
 When doing any sort of programming work, things often don't perfectly on the first try. Unfortunately, making mistakes and learning from them is an important part of becomming a better programmer. The process of troubleshooting generally follows 4 main steps:
