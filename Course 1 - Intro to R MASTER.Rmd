@@ -43,7 +43,7 @@ All of the tutors on the course are PhD candidates in the Wellcome Trust Doctora
 
 *[Naomi Gibbs](https://www.linkedin.com/in/naomi-gibbs-27810248/)* joined ScHARR in 2017. Naomi is working on a health economic model to inform alcohol pricing policy options in South Africa. She is working closely with local stakeholders to conceptualise and validate the model. Naomi will be using R to create and communicate her modelling work and hopes to enable greater engagement from policy makers through interactive dashboards.
 
-*[Amy Chang](https://www.linkedin.com/in/naomi-gibbs-27810248/)* joined ScHARR in 2018. Prior to joining ScHARR she worked at the Centre for Drug Evaluation (HTA body) in Taiwan. Her research interests lie in health economic modelling with an emphasis on evaluating health interventions and better understanding the effect of intervention timing using evidence generated from real-world data. Amy has previously used R for, among other things, survival analysis and large scale data scraping.   
+*[Amy Chang](https://www.sheffield.ac.uk/scharr/staff-pgrs/studentprofiles/amychang)* joined ScHARR in 2018. Prior to joining ScHARR she worked at the Centre for Drug Evaluation (HTA body) in Taiwan. Her research interests lie in health economic modelling with an emphasis on evaluating health interventions and better understanding the effect of intervention timing using evidence generated from real-world data. Amy has previously used R for, among other things, survival analysis and large scale data scraping.   
 
 
 \newpage
