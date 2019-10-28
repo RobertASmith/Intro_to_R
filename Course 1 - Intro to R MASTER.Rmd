@@ -182,10 +182,13 @@ a
 # add one to a. A is now 11.
 a <- a + 1 
 a 
-# create an object called b which is 5 more than a
+# create an object called b which is 5 less than a
 b <- a - 5
+b
+# change a to be 5 less than it was originally
 a <- a - 5
 a-b
+# a and b are equal!!!
 ```
 
 ### Seeing our Objects
@@ -209,11 +212,30 @@ rm(list=ls())
 
 
 **Exercises**  
-1) Create an object d equal to 10. Divide d by 5. Multiply d by 8. Add 8 to d. what is d?  
-2) Create an object m equal to 7. Overwrite m with m = m times 10. Create an object p equal to 2. Overwrite p with p = p times 12. Create an object w equal to m divided by p. What values do m, p and w take? 
+1a)Create an object d equal to 10.
+
+b) Divide d by 5. 
+
+c) Multiply d by 8.
+
+d) Add 8 to d. 
+
+e) What is d? 
+
+2a) Create an object m equal to 7. 
+
+b) Overwrite m with m = m times 10. 
+
+c) Create an object p equal to 2. 
+
+d)Overwrite p with p = p times 12. 
+
+e) Create an object w equal to m divided by p. 
+
+f) What values do m, p and w take? 
 
 ```{r,echo=FALSE, eval=FALSE}
-# create an object a which is 10.
+# create an object d which is 10.
 d <- 10 ; d <- d/5 ; d <- d*8 ; d <- d+8 ; d
 m <- 7 ; m <- m*10 ; p <- 2 ; p <- p*12 ; w <- m/p
 ```
@@ -245,9 +267,13 @@ b
 **Exercises**  
 
 Use R to answer the following questions for you:  
-1) Is 6.2 greater than 1.6^4?  
-2) Is 7.5 equal to 137.25/18.?  
-3) m = 84 / 106, q = 156/3, is m/q greater than, equal to or less than  0.0152
+1) Is 4 greater than 2?  
+2) Is 5 less than 3?  
+3) Is 6.2 equal to 12.4/2?   
+4) Is 5 equal to or greater than 4? (hint:  use >=)  
+5) Is 5 equal to or less than 5? (hint:  use <=)  
+2) Is 7.5 equal to 137.25/18?    
+3) m = 84 / 106, q = 156/3, is m/q greater than, less than or equal to 0.0152?  
 
 \newpage
 
@@ -295,14 +321,14 @@ c(height,weight,first_name)
 
 **Exercises**
 
-Create a vector called 'odds' with the numbers 1,3,5,7,9. Show what class odds is. 
+1) Create a vector called 'odds' with the numbers 1,3,5,7,9. Show what class odds is. 
 
-1) Evaluate which numbers in the odds vector are greater than 4. 
+2) Evaluate which numbers in the odds vector are greater than 4. 
 
-2) Create a vector called 'fail' containing 1,3,5,'seven',9.
+3) Create a vector called 'fail' containing 1,3,5,'seven',9.
 Show what class fail is.
 
-3) Create a vector that gives everyone's weight in pounds (2.2lbs to kg)
+4) Create a vector that gives everyone's weight in pounds (2.2lbs to kg)
 
 ### Basic object Types
 
@@ -324,15 +350,6 @@ df$height
 # We can add a new variable easily, in this case based on other variables within the dataframe.
 df$bmi <- df$weight / df$height^2 
 df
-# We can also select row and columns using row/column numbers, e.g. row1
-df[1,]
-# column 3
-df[,3]
-
-# matrices can't have different classes, everything forced to character.
-m.df <- as.matrix(df)
-# therefore can't multiply
-# m.df[,"height"]*100
 ```
 
 ### Subsetting
@@ -380,7 +397,7 @@ Note that there are other more advanced methods, which uses pipes and require le
 
 \newpage
 
-### INDEPENDENT EXERCISES
+### Independent Exercises
 
 **Exercise 1**
 
