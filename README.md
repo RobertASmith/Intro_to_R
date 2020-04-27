@@ -12,7 +12,7 @@ It is provided open source, although if you are not attending the course we woul
 
 Contents:
 
-The main PDF for the course can be found here: [Course Content](https://github.com/RobertASmith/Intro_to_R/.pdf)
+The main PDF for the course can be found here: [Course Content](https://github.com/RobertASmith/Intro_to_R/blob/master/Course_1_-_Intro_to_R_MASTER.pdf)
 
 The data and images for the course content can be found in data & images folders respectively.
 
