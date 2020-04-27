@@ -1,6 +1,9 @@
 # Intro_to_R
+
 Intro to R Data and Markdown Files
 
-Markdown - file containing the documentation for the course.
-Data     - data for the course
-Images   - images in markdown document.
+This repository contains the material for the introduction to R course due to be held on 5th May 2020.
+
+It is provided open source, although if you are not attending the course we would recomment following Hadley Wickham's book 'R for Data Science' instead: https://r4ds.had.co.nz/
+
+Contents:
