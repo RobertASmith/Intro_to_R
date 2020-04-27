@@ -6,15 +6,7 @@
 
 Contact:   rasmith3@sheffield.ac.uk
 
-This repository contains the material for the introduction to R course due to be held on 5th May 2020.
-
-It is provided open source, although if you are not attending the course we would recomment following Hadley Wickham's book 'R for Data Science' instead: https://r4ds.had.co.nz/
-
-Contents:
-
-The main PDF for the course can be found here: [Course Content](https://github.com/RobertASmith/Intro_to_R/blob/master/Course_1_-_Intro_to_R_MASTER.pdf)
-
-The data and images for the course content can be found in data & images folders respectively.
+This repository contains the material for the introduction to R course due to be held on 5th May 2020. The main PDF for the course can be found here: [Course Content](https://github.com/RobertASmith/Intro_to_R/blob/master/Course_1_-_Intro_to_R_MASTER.pdf). All material is provided open source, although if you are not attending the course we would recommend following Hadley Wickham's book 'R for Data Science' instead: https://r4ds.had.co.nz/
 
 ### List of contributors (26/02/2020)
 - Robert Smith, University of Sheffield
